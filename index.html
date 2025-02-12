@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Proposal</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #ffe6e6;
+        }
+        .container {
+            text-align: center;
+        }
+        .question {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .buttons {
+            display: flex;
+            gap: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+        #yesBtn {
+            background-color: #ff4d4d;
+            color: white;
+        }
+        #noBtn {
+            background-color: gray;
+            color: black;
+        }
+        .hidden {
+            display: none;
+        }
+        .response {
+            font-size: 30px;
+            color: #ff4d4d;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="question">Will you be my Valentine?</div>
+        <div class="buttons">
+            <button id="yesBtn">Yes</button>
+            <button id="noBtn">No</button>
+        </div>
+        <div class="response hidden" id="response">Yay! 💖</div>
+    </div>
+
+    <script>
+        document.getElementById('yesBtn').addEventListener('click', function() {
+            document.querySelector('.buttons').classList.add('hidden');
+            document.getElementById('response').classList.remove('hidden');
+        });
+
+        document.getElementById('noBtn').addEventListener('mouseover', function() {
+            const button = this;
+            const container = document.querySelector('.container');
+            const maxX = container.clientWidth - button.clientWidth;
+            const maxY = container.clientHeight - button.clientHeight;
+            
+            button.style.position = 'absolute';
+            button.style.left = Math.random() * maxX + 'px';
+            button.style.top = Math.random() * maxY + 'px';
+        });
+    </script>
+</body>
+</html> 
