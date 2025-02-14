@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentine's Proposal</title>
+    <title>A very important question for you </title>
     <style>
         body {
             display: flex;
@@ -15,17 +16,22 @@
             font-family: Arial, sans-serif;
             background-color: #ffe6e6;
         }
+
         .container {
             text-align: center;
         }
+
         .question {
             font-size: 24px;
             margin-bottom: 20px;
         }
+
         .buttons {
             display: flex;
             gap: 20px;
+            justify-content: center;
         }
+
         button {
             padding: 10px 20px;
             font-size: 18px;
@@ -33,50 +39,364 @@
             border: none;
             border-radius: 5px;
         }
+
         #yesBtn {
             background-color: #ff4d4d;
             color: white;
         }
+
         #noBtn {
             background-color: gray;
             color: black;
         }
+
         .hidden {
             display: none;
         }
+
         .response {
             font-size: 30px;
             color: #ff4d4d;
             margin-top: 20px;
         }
+
+        /* Update carousel styles */
+        .carousel-container {
+            width: 100%;
+            max-width: 600px;         /* Set maximum width */
+            overflow: hidden;
+            position: relative;
+            margin: 20px 0;
+            height: 400px;            /* Set fixed container height */
+        }
+
+        .carousel-slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            height: 100%;             /* Fill container height */
+        }
+
+        .carousel-slide {
+            flex: 0 0 100%;
+            min-width: 100%;
+            height: 100%;             /* Fill container height */
+            display: flex;            /* Center the image */
+            align-items: center;      /* Vertically center */
+            justify-content: center;  /* Horizontally center */
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 15px;      /* Added rounded corners */
+        }
+
+        /* Updated fireworks animation */
+        .firework {
+            position: fixed;
+            pointer-events: none;
+        }
+
+        .firework::before, .firework::after {
+            content: '';
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            box-shadow: 0 0 #fff;
+            animation: firework-particles 2s ease-out infinite;
+        }
+
+        .firework::after {
+            animation: firework-particles 2s ease-out infinite, firework-rotate 0.75s linear infinite;
+        }
+
+        @keyframes firework-particles {
+            0% {
+                box-shadow: 
+                    0 0 #ff69b4,
+                    0 0 #ff69b4,
+                    0 0 #ff69b4,
+                    0 0 #ff69b4,
+                    0 0 #ff69b4,
+                    0 0 #ff69b4,
+                    0 0 #ff69b4,
+                    0 0 #ff69b4;
+            }
+            100% {
+                box-shadow: 
+                    -120px -120px #ff69b4,
+                    120px -120px #ff69b4,
+                    120px 120px #ff69b4,
+                    -120px 120px #ff69b4,
+                    -200px 0 #ff69b4,
+                    200px 0 #ff69b4,
+                    0 -200px #ff69b4,
+                    0 200px #ff69b4;
+            }
+        }
+
+        @keyframes firework-rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(45deg); }
+        }
+
+        /* Add celebration text style */
+        .celebration {
+            font-size: 48px;
+            color: #ff4d4d;
+            margin: 20px 0;
+            animation: bounce 0.5s ease infinite alternate;
+        }
+
+        @keyframes bounce {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
+        }
+
+        /* Add valentine message style */
+        .valentine-message {
+            font-size: 24px;
+            color: #ff4d4d;
+            margin-top: 20px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Add CSS-only cupid arrow */
+        .cupid-arrow {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1000;
+            animation: shoot-arrow 2s linear;
+        }
+
+        .cupid-arrow::before {  /* Arrow shaft */
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 3px;
+            background: #ff4d4d;
+            right: 0;
+        }
+
+        .cupid-arrow::after {  /* Arrow head */
+            content: '💘';
+            position: absolute;
+            font-size: 24px;
+            right: -5px;
+            top: -12px;
+            transform: rotate(-45deg);
+        }
+
+        @keyframes shoot-arrow {
+            0% {
+                right: -60px;
+                transform: translateY(-50%) rotate(-20deg);
+            }
+            20% {
+                transform: translateY(-50%) rotate(0deg);
+            }
+            80% {
+                transform: translateY(-50%) rotate(0deg);
+            }
+            100% {
+                right: 100%;
+                transform: translateY(-50%) rotate(20deg);
+            }
+        }
+
+        /* Add responsive styles */
+        @media (max-width: 768px) {
+            .question {
+                font-size: 20px;
+                padding: 0 20px;
+            }
+
+            .celebration {
+                font-size: 36px;
+            }
+
+            .valentine-message {
+                font-size: 20px;
+                padding: 0 20px;
+            }
+
+            .carousel-container {
+                max-width: 100%;
+                height: 300px;
+                margin: 10px;
+            }
+
+            button {
+                padding: 8px 16px;
+                font-size: 16px;
+            }
+
+            .ps-message {
+                font-size: 16px;
+                padding: 0 20px;
+            }
+        }
+
+        /* Add PS message style */
+        .ps-message {
+            font-size: 18px;
+            color: #ff4d4d;
+            margin-top: 30px;
+            font-style: italic;
+            animation: fadeIn 1.5s ease-in;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
-        <div class="question">Will you be my Valentine?</div>
-        <div class="buttons">
-            <button id="yesBtn">Yes</button>
-            <button id="noBtn">No</button>
+        <div class="question-section" id="questionSection">
+            <div class="question">Hi beebs, Will you please be my Valentine?</div>
+            <img src="cat.gif" alt="Cute cat" style="width: 200px; margin: 20px 0;">
+            <div class="buttons">
+                <button id="yesBtn">Yes</button>
+                <button id="noBtn">No</button>
+            </div>
         </div>
-        <div class="response hidden" id="response">Yay! 💖</div>
+        <div class="response hidden" id="response">
+            <h2 class="celebration">YAY! 💖</h2>
+            <div class="carousel-container">
+                <div class="carousel-slides" id="carousel"></div>
+            </div>
+            <div class="valentine-message">
+                Happy Valentine's Day beebs, I love you so much! 💝
+            </div>
+            <div class="ps-message">
+                PS. Please check your doorstep tomorrow when you get home 🎁
+            </div>
+        </div>
     </div>
 
     <script>
-        document.getElementById('yesBtn').addEventListener('click', function() {
-            document.querySelector('.buttons').classList.add('hidden');
-            document.getElementById('response').classList.remove('hidden');
+        // Add dynamic image loading
+        const imageFiles = [
+            'IMG_0940.jpeg',
+            'IMG_0996.jpeg',
+            'IMG_1357.jpeg',
+            'IMG_2347.jpeg',
+            'IMG_2383.jpeg',
+            'IMG_8363.jpeg',
+            'IMG_8954.jpeg',
+            'IMG_9084.jpeg',
+            'IMG_9243.jpeg'
+        ];
+        const carousel = document.getElementById('carousel');
+
+        // Create slides dynamically
+        imageFiles.forEach((filename, index) => {
+            const slide = document.createElement('div');
+            slide.className = 'carousel-slide';
+            slide.innerHTML = `<img src="imgs/${filename}" alt="Carousel image ${index + 1}">`;
+            carousel.appendChild(slide);
         });
 
-        document.getElementById('noBtn').addEventListener('mouseover', function() {
-            const button = this;
-            const container = document.querySelector('.container');
-            const maxX = container.clientWidth - button.clientWidth;
-            const maxY = container.clientHeight - button.clientHeight;
+        let currentSlide = 0;
+        const totalSlides = imageFiles.length;
+
+        function moveCarousel() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+            // Reset position without transition when reaching end
+            if (currentSlide === totalSlides - 1) {
+                setTimeout(() => {
+                    carousel.style.transition = 'none';
+                    carousel.style.transform = 'translateX(0)';
+                    setTimeout(() => {
+                        carousel.style.transition = 'transform 0.5s ease-in-out';
+                    }, 10);
+                }, 500);
+            }
+        }
+
+        // Start automatic rotation every 3 seconds
+        setInterval(moveCarousel, 3000);
+
+        document.getElementById('yesBtn').addEventListener('click', function () {
+            document.getElementById('questionSection').classList.add('hidden');
+            document.getElementById('response').classList.remove('hidden');
             
-            button.style.position = 'absolute';
+            // Create arrow function
+            function shootArrow() {
+                const arrow = document.createElement('div');
+                arrow.className = 'cupid-arrow';
+                arrow.style.top = Math.random() * (window.innerHeight - 100) + 50 + 'px';
+                document.body.appendChild(arrow);
+                
+                // Remove arrow after animation
+                setTimeout(() => {
+                    arrow.remove();
+                }, 2000);
+            }
+
+            // Initial burst of arrows
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    shootArrow();
+                }, i * 300); // Shoot 5 arrows quickly at first
+            }
+
+            // Continue shooting arrows more frequently
+            setInterval(() => {
+                // Shoot 4-5 arrows each time
+                for (let i = 0; i < Math.floor(Math.random() * 5) + 5; i++) {
+                    setTimeout(() => {
+                        shootArrow();
+                    }, i * 200);
+                }
+            }, 2000); // Repeat every 2 seconds instead of 4
+
+            function createFirework() {
+                const firework = document.createElement('div');
+                firework.className = 'firework';
+                firework.style.left = Math.random() * window.innerWidth + 'px';
+                firework.style.top = Math.random() * window.innerHeight + 'px';
+                document.body.appendChild(firework);
+                
+                // Remove firework after animation
+                setTimeout(() => {
+                    firework.remove();
+                }, 2000);
+            }
+
+            // Create initial burst of fireworks
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    createFirework();
+                }, i * 300);
+            }
+
+            // Continue creating occasional fireworks
+            setInterval(() => {
+                createFirework();
+            }, 2000);
+        });
+
+        document.getElementById('noBtn').addEventListener('mouseover', function () {
+            const button = this;
+            const maxX = window.innerWidth - button.clientWidth;   // Use window width instead of container
+            const maxY = window.innerHeight - button.clientHeight; // Use window height instead of container
+
+            button.style.position = 'fixed';  // Change to fixed positioning
             button.style.left = Math.random() * maxX + 'px';
             button.style.top = Math.random() * maxY + 'px';
         });
     </script>
 </body>
-</html> 
+
+</html>
